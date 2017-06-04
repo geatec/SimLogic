@@ -5,7 +5,7 @@ Usage:
 
 Remarks:
 
-- The programs have been precompiled for Windows with g++ using debug_all.bat,
+- The examples have been precompiled for Windows with g++ using debug_all.bat,
 but due to their simplicity they should also compile on Linux and OS X,
 using appropriate C++ compilers and shell scripts or make files.
 - To use console input and output, use the compilation batches with the word 'debug' in it.
