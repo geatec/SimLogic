@@ -18,32 +18,55 @@ limitations under the License.
 
 #include <simlogic.h>
 
-#ifdef debug   // Don't generate any IO code for a single board computer
-#include <iostream>
-using namespace std;
-#endif
-
 CircuitElement::CircuitElement (const char *name): name (name), value (0), next (0) {
 }
 
-Input::Input (const char *name): CircuitElement (name) {
+False::False (const char *name): CircuitElement (name) {
 }
     
-void Input::evaluate () {
+void False::evaluate () {
+    value = false;
 #ifdef debug
-    char answer [2];
-    cout << "INPUT " << name << ": " << value << " ";
-    cin.getline (answer, 2);
-    if (answer [0] == '0') {
-        value = false;
-    }
-    else if (answer [0] == '1') {
-        value = true;
-    }
+    cout << "FALSE " << name << ": " << value << endl;
+#endif
+}
+    
+True::True (const char *name): CircuitElement (name) {
+}
+
+void True::evaluate () {
+    value = true;
+#ifdef debug
+    cout << "TRUE " << name << ": " << value << endl;
 #endif
 }
 
-And::And (const char *name): CircuitElement (name) {
+Input::Input (const char *name): CircuitElement (name), in (0) {
+}
+    
+void Input::evaluate () {                                   // Input connection terminal, should have its own message c.q. LED
+#ifdef debug
+    if (in == 0) {                                          // Debug mode, not connected
+        char answer [2];
+        cout << "INPUT " << name << ": " << " ";
+        cin.getline (answer, 2);                            // Only change if no 0 or 1 is typed
+        if (answer [0] == '0') {
+            value = false;
+        }
+        else if (answer [0] == '1') {
+            value = true;
+        }
+    }
+    else {                                                  // Debug mode, connected
+        value = in->value;
+        cout << "INPUT " << name << ": " << value << endl;
+    }
+#elif
+    value = in->value;                                       // Non-debug mode (so always connected)
+#endif
+}
+
+And::And (const char *name): CircuitElement (name), inA (0), inB (0) {
 }
 
 void And::evaluate () {
@@ -53,7 +76,7 @@ void And::evaluate () {
 #endif
 }
 
-Or::Or (const char *name): CircuitElement (name) {
+Or::Or (const char *name): CircuitElement (name), inA (0), inB (0) {
 }
 
 void Or::evaluate () {
@@ -63,7 +86,7 @@ void Or::evaluate () {
 #endif
 }
 
-Xor::Xor (const char *name): CircuitElement (name) {
+Xor::Xor (const char *name): CircuitElement (name), inA (0), inB (0) {
 }
 
 void Xor::evaluate () {
@@ -73,7 +96,7 @@ void Xor::evaluate () {
 #endif
 }
 
-Not::Not (const char *name): CircuitElement (name) {
+Not::Not (const char *name): CircuitElement (name), in (0) {
 }
 
 void Not::evaluate () {
@@ -83,7 +106,7 @@ void Not::evaluate () {
 #endif
 }
 
-Oneshot::Oneshot (const char *name): CircuitElement (name), oldInputValue (false) {
+Oneshot::Oneshot (const char *name): CircuitElement (name), in (0), oldInputValue (false) {
 }
     
 void Oneshot::evaluate () {
@@ -94,7 +117,7 @@ void Oneshot::evaluate () {
 #endif
 }
 
-Latch::Latch (const char *name): CircuitElement (name) {
+Latch::Latch (const char *name): CircuitElement (name), set (0), reset (0) {
 }
 
 void Latch::evaluate () {
@@ -145,4 +168,3 @@ void connect (CircuitElement &source, CircuitElement *&sinkInput) {
 void evaluate () {
     evaluator.evaluate ();
 }
-

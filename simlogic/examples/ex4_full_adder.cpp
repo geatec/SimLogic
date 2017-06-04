@@ -44,13 +44,8 @@ int main  () {
     connect (anAnd, carry.inA);
     connect (andAB, carry.inB);
 
-    for (;;) {  // Forever loop, idiomatic since K&R C
-        // All Arduino digitalRead's go here
-        
-        // Evaluate interconnected circuit once
+    for (;;) {
         evaluate ();
-        
-        // All Arduino digitalWrite's go here
     }
     
     return 0;

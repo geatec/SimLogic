@@ -28,13 +28,8 @@ int main  () {
     connect (reset, latch.reset);
     connect (latch, oneshot.in);
 
-    for (;;) {  // Forever loop, idiomatic since K&R C
-        // All Arduino digitalRead's go here
-        
-        // Evaluate interconnected circuit once
+    for (;;) {
         evaluate ();
-        
-        // All Arduino digitalWrite's go here
     }
     
     return 0;

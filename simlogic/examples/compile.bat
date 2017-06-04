@@ -1,5 +1,4 @@
 @echo off
-
 REM ====== Legal notices
 
 REM Copyright 2017 Jacques de Hooge, GEATEC engineering, www.geatec.com
@@ -18,4 +17,3 @@ REM limitations under the License.
 
 g++ -I.. %1 ..\simlogic.cpp -o %~n1.exe 
 
-@echo on

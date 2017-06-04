@@ -30,7 +30,19 @@ struct CircuitElement {
     virtual void evaluate () = 0;       
 };
 
+struct False: CircuitElement {
+    False (const char *name);
+    void evaluate ();
+};
+
+struct True: CircuitElement {
+    True (const char *name);
+    void evaluate ();
+};
+
 struct Input: CircuitElement {
+    CircuitElement *in;
+    
     Input (const char *name);
     void evaluate ();
 };
@@ -93,3 +105,8 @@ extern CircuitEvaluator evaluator;
 #define create(type, name) type name (#name); evaluator.add (name)
 extern void connect (CircuitElement &source, CircuitElement *&sinkInput);
 extern void evaluate ();
+
+#ifdef debug   // Don't generate any IO code for a single board computer
+#include <iostream>
+using namespace std;
+#endif
