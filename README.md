@@ -1,7 +1,7 @@
 Usage:
 
-Example 1 t/m 4: Enter INPUT values as 0 or 1
-Example 5: Enter INPUT values as 00, 01, 10 or 01
+- Example 1 t/m 4: Enter INPUT values as 0 or 1
+- Example 5: Enter INPUT values as 00, 01, 10 or 01
 
 Remark 1: Terminate program simply by CTRL + C
 
