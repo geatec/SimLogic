@@ -16,40 +16,81 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <simlogic.h>
+#include "simlogic.h"
 
-CircuitElement::CircuitElement (const char *name): name (name), value (0), next (0) {
+#ifdef __debug__
+#ifdef __arduino__
+SerialStream &SerialStream::operator<< (const char * const data) {
+    Serial.write (data);
+    Serial.flush ();
+    return *this;
 }
 
-False::False (const char *name): CircuitElement (name) {
+SerialStream &SerialStream::operator<< (bool data) {
+    return this->operator<< (data ? "true" : "false");
+}
+
+SerialStream &SerialStream::operator<< (int data) {
+    static char chars [256];
+    itoa (data, chars, 10);
+    return this->operator<< (chars);
+}
+
+SerialStream &SerialStream::operator>> (char * const data) {
+    int index = 0;
+    for (;;) {
+        delay (10);
+        if (Serial.available ()){
+            data [index] = Serial.read ();
+            Serial.print (data [index]);
+            if (data [index] == '\n') {
+                data [index] = (char) 0;
+                break;
+            }
+            index++;
+        }
+    }
+    return *this;
+}
+
+SerialStream cin, cout;
+
+const char * const endl = "\n";
+#endif
+#endif
+
+CircuitElement::CircuitElement (const char * const name): name (name), value (0), next (0) {
+}
+
+False::False (const char * const name): CircuitElement (name) {
 }
     
 void False::evaluate () {
     value = false;
-#ifdef debug
+#ifdef __debug__
     cout << "FALSE " << name << ": " << value << endl;
 #endif
 }
     
-True::True (const char *name): CircuitElement (name) {
+True::True (const char * const name): CircuitElement (name) {
 }
 
 void True::evaluate () {
     value = true;
-#ifdef debug
+#ifdef __debug__
     cout << "TRUE " << name << ": " << value << endl;
 #endif
 }
 
-Input::Input (const char *name): CircuitElement (name), in (0) {
+Input::Input (const char * const name): CircuitElement (name), in (0) {
 }
     
 void Input::evaluate () {                                   // Input connection terminal, should have its own message c.q. LED
-#ifdef debug
-    if (in == 0) {                                          // Debug mode, not connected
+#ifdef __debug__
+    if (in == 0) {                                          // __debug__ mode, not connected
         char answer [2];
         cout << "INPUT " << name << ": " << " ";
-        cin.getline (answer, 2);                            // Only change if no 0 or 1 is typed
+        cin >> answer;
         if (answer [0] == '0') {
             value = false;
         }
@@ -57,67 +98,65 @@ void Input::evaluate () {                                   // Input connection 
             value = true;
         }
     }
-    else {                                                  // Debug mode, connected
+    else {                                                  // __debug__ mode, connected
         value = in->value;
         cout << "INPUT " << name << ": " << value << endl;
     }
-#else
-    value = in->value;                                       // Non-debug mode (so always connected)
 #endif
 }
 
-And::And (const char *name): CircuitElement (name), inA (0), inB (0) {
+And::And (const char * const name): CircuitElement (name), inA (0), inB (0) {
 }
 
 void And::evaluate () {
     value = inA->value && inB->value;
-#ifdef debug
+#ifdef __debug__
     cout << "AND " << name << ": " << value << endl;
 #endif
 }
 
-Or::Or (const char *name): CircuitElement (name), inA (0), inB (0) {
+Or::Or (const char * const name): CircuitElement (name), inA (0), inB (0) {
 }
 
 void Or::evaluate () {
     value = inA->value || inB->value;
-#ifdef debug
+#ifdef __debug__
     cout << "OR " << name << ": " << value << endl;
 #endif
 }
 
-Xor::Xor (const char *name): CircuitElement (name), inA (0), inB (0) {
+Xor::Xor (const char * const name): CircuitElement (name), inA (0), inB (0) {
 }
 
 void Xor::evaluate () {
     value = inA->value != inB->value;
-#ifdef debug
+#ifdef __debug__
     cout << "XOR " << name << ": " << value << endl;
 #endif
 }
 
-Not::Not (const char *name): CircuitElement (name), in (0) {
+Not::Not (const char * const name): CircuitElement (name), in (0) {
 }
 
 void Not::evaluate () {
     value = !in->value;
-#ifdef debug
+#ifdef __debug__
     cout << "NOT " << name << ": " << value << endl;
 #endif
 }
 
-Oneshot::Oneshot (const char *name): CircuitElement (name), in (0), oldInputValue (false) {
+Oneshot::Oneshot (const char * const name): CircuitElement (name), in (0), oldInputValue (false) {
 }
     
 void Oneshot::evaluate () {
     value = in->value and !oldInputValue;
     oldInputValue = in->value;
-#ifdef debug
+#ifdef __debug__
     cout << "ONESHOT " << name << ": " << value << endl;
 #endif
 }
 
-Latch::Latch (const char *name): CircuitElement (name), set (0), reset (0) {
+Latch::Latch (const char * const name): CircuitElement (name), set (0), reset (0) {
 }
 
 void Latch::evaluate () {
@@ -127,13 +166,13 @@ void Latch::evaluate () {
     if (reset->value) {
         value = false;
     }
-#ifdef debug
+#ifdef __debug__
     cout << "LATCH " << name << ": " << value << endl;
 #endif
 }
 
 CircuitEvaluator::CircuitEvaluator (): first (0), lastSlot (&first) {
-#ifdef debug
+#ifdef __debug__
     cycleNr = 0;
 #endif
 }
@@ -144,17 +183,15 @@ void CircuitEvaluator::add (CircuitElement &element) {
 }
      
 void CircuitEvaluator::evaluate () {
-#ifdef debug
+#ifdef __debug__
     cout << "CYCLE" << ++cycleNr << "\n";
-#endif
-    
+#endif    
     CircuitElement *current = first;
     while (current != 0) {
         current->evaluate ();
         current = current->next;
     }
-    
-#ifdef debug
+#ifdef __debug__
     cout << "\n";
 #endif
 }

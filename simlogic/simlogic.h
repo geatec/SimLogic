@@ -21,56 +21,65 @@ Understanding this header requires understanding some C++
 But using it merely requires C knowledge
 */
 
+#include "simulation.h"
+
+#ifdef __arduino__
+#include <Arduino.h>  // Will provide all Arduino stuff
+#ifdef __debug__
+#include <stdlib.h>   // Will provide itoa
+#endif
+#endif
+
 struct CircuitElement {
     bool value;
-    const char *name;
+    const char * const name;
     CircuitElement *next;
     
-    CircuitElement (const char *name);    
+    CircuitElement (const char * const name);    
     virtual void evaluate () = 0;       
 };
 
 struct False: CircuitElement {
-    False (const char *name);
+    False (const char * const name);
     void evaluate ();
 };
 
 struct True: CircuitElement {
-    True (const char *name);
+    True (const char * const name);
     void evaluate ();
 };
 
 struct Input: CircuitElement {
     CircuitElement *in;
     
-    Input (const char *name);
+    Input (const char * const name);
     void evaluate ();
 };
 
 struct And: CircuitElement {
     CircuitElement *inA, *inB;
     
-    And (const char *name);
+    And (const char * const name);
     void evaluate ();
 };
 
 struct Or: CircuitElement  {
     CircuitElement *inA, *inB;    
-    Or (const char *name);
+    Or (const char * const name);
     void evaluate ();
 };
 
 struct Xor: CircuitElement  {
     CircuitElement *inA, *inB;    
     
-    Xor (const char *name);
+    Xor (const char * const name);
     void evaluate ();
 };
 
 struct Not: CircuitElement  {
     CircuitElement *in;
     
-    Not (const char *name);
+    Not (const char * const name);
     void evaluate ();
 };
 
@@ -78,20 +87,20 @@ struct Oneshot: CircuitElement  {
     CircuitElement *in;
     bool oldInputValue;
     
-    Oneshot (const char *name);
-    void evaluate ();
+    Oneshot (const char * const name);
+    void evaluate (); 
 };
 
 struct Latch: CircuitElement  {
     CircuitElement *set, *reset;
     
-    Latch (const char *name);
+    Latch (const char * const name);
     void evaluate ();
 };
 
 struct CircuitEvaluator {
     CircuitElement *first, **lastSlot;
-#ifdef debug
+#ifdef __debug__
     int cycleNr;
 #endif
     
@@ -106,7 +115,19 @@ extern CircuitEvaluator evaluator;
 extern void connect (CircuitElement &source, CircuitElement *&sinkInput);
 extern void evaluate ();
 
-#ifdef debug   // Don't generate any IO code for a single board computer
+#ifdef __debug__
+#ifdef __arduino__
+struct SerialStream {
+    SerialStream &operator<< (const char * const data);
+    SerialStream &operator<< (bool data);
+    SerialStream &operator<< (int data);
+    SerialStream &operator>> (char * const data);
+};
+
+extern const char * const endl;
+#else
 #include <iostream>
 using namespace std;
 #endif
+#endif
+
