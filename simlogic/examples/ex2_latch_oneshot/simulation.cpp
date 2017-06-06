@@ -19,30 +19,14 @@ limitations under the License.
 #include <simlogic.h>
 
 int main  () {
-    create (Input, inputA);
-    create (Input, inputB);
-    create (Input, inputCarry);
-    
-    create (Xor, xorAB);
-    create (And, anAnd);
-    create (And, andAB);
-    
-    create (Xor, sum);
-    create (Or, carry);
+    create (Input, set);
+    create (Input, reset);
+    create (Latch, latch);
+    create (Oneshot, oneshot);
 
-    connect (inputA, xorAB.inA);
-    connect (inputB, xorAB.inB);
-    connect (inputA, andAB.inA);
-    connect (inputB, andAB.inB);
-    
-    connect (xorAB, sum.inA);
-    connect (inputCarry, sum.inB);
-    
-    connect (xorAB, anAnd.inA);
-    connect (inputCarry, anAnd.inB);
-    
-    connect (anAnd, carry.inA);
-    connect (andAB, carry.inB);
+    connect (set, latch.set);
+    connect (reset, latch.reset);
+    connect (latch, oneshot.in);
 
     for (;;) {
         evaluate ();

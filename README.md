@@ -5,12 +5,10 @@ Usage:
 
 Remarks:
 
-- The examples have been precompiled for Windows with g++ using debug_all.bat,
-but due to their simplicity they should also compile on Linux and OS X,
+- The examples have been precompiled for Windows with g++ using compile_all.bat,
+- As there is no Arduino board in this case, they will use console IO.
+- Due to their simplicity the examples should also compile on Linux and OS X,
 using appropriate C++ compilers and shell scripts or make files.
-- To use console input and output, use the compilation batches with the word 'debug' in it.
-- To use a single board computer with buttons and LED's, use the compilation batches with the word 'compile' in it.
-- Single board usage has not yet been tested, but the required modifications should be trivial.
-- Terminate each program simply by CTRL + C.
+- When running in a console Window, terminate each program simply by CTRL + C.
 - There's no error protection, so after an erroneous input best restart the program.
 - While simlogic.h and simlogic.cpp use C++ idiom, the examples only use C'ish idiom.
