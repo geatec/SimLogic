@@ -25,9 +25,9 @@ SimLogic is a simple logic simulator for educational purposes. It can work in co
 
 Each SimLogic program is defined in a file called *simulation.cpp*. Note that this one file is the only "valuable" user made file in a project. All the rest is boilerplate code, identical for each project. A simulation can run in three ways, depending on macro defintions in *simulation.h*, namely:
 
-1 Console I/O on a PC (Command prompt), *__debug__* defined, *__arduino__* not defined.
-2 Console I/O on an Arduino (Serial monitor, but LED's function as well), *__debug__* defined, *__arduino__* defined.
-3 Hardware I/O on an Arduino (LED's and buttons), *__debug__* not defined, *__arduino__* not defined.
+1. Console I/O on a PC (Command prompt), *__debug__* defined, *__arduino__* not defined.
+2. Console I/O on an Arduino (Serial monitor, but LED's function as well), *__debug__* defined, *__arduino__* defined.
+3. Hardware I/O on an Arduino (LED's and buttons), *__debug__* not defined, *__arduino__* not defined.
 
 To run the examples on an Arduino, rather than a PC, define symbol *__arduino__*.
 
