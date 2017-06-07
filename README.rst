@@ -1,3 +1,26 @@
+**Wat is SimLogic**
+
+SimLogic is a simple logic simulator for educational purposes. It can work in conjunction with an Arduino. First *create* circuit elements and then *connect* them, as in the following code: ::
+
+    #include "simlogic.h"
+
+    int main () {    
+        create (Input, inputA);
+        create (Input, inputB);
+        create (And, anAnd);
+        create (Not, aNot);
+
+        connect (inputA, anAnd.inA);
+        connect (inputB, anAnd.inB);
+        connect (anAnd, aNot.in);
+
+        while (true) {
+            evaluate ();
+        }
+        
+        return 0;
+    }
+
 **Features**
 
 Each SimLogic program is defined in a file called *simulation.cpp*. Note that this one file is the only "valuable" user made file in a project. All the rest is boilerplate code, identical for each project. A simulation can run in three ways, depending on macro defintions in *simulation.h*, namely:
