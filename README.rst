@@ -1,4 +1,5 @@
-**Wat is SimLogic**
+Wat is SimLogic
+===============
 
 SimLogic is a simple logic simulator for educational purposes. It can work in conjunction with an Arduino. First *create* circuit elements and then *connect* them, as in the following code: ::
 
@@ -21,7 +22,8 @@ SimLogic is a simple logic simulator for educational purposes. It can work in co
         return 0;
     }
 
-**Features**
+Features
+========
 
 Each SimLogic program is defined in a file called *simulation.cpp*. Note that this one file is the only "valuable" user made file in a project. All the rest is boilerplate code, identical for each project. A simulation can run in three ways, depending on macro defintions in *simulation.h*, namely:
 
@@ -38,12 +40,14 @@ On a PC a regular command prompt window is used for input and output.
 
 **Each simulation example has a *compile.bat* **
 
-**Usage**
+Usage
+=====
 
 - Example 1 t/m 4: Enter INPUT values as 0 or 1
 - Example 5: Enter INPUT values as 00, 01, 10 or 01
 
-**Hardware**
+Hardware
+========
 
 Example *ex4_full_adder* was instrumented for the Arduino, by adding pin assignments, I/O statements and an optional *__main__*, which will be called in the *setup* function in the *.ino* file. For variable scoping reasons, *__main__* has its own program loop, so the *loop* function in the *.ino* file will not be used.
 
@@ -56,7 +60,8 @@ It was tested on an Arduino due, with the following test circuit:
 
 Note that for educational purposes, the LED's can best be placed into a circuit diagram of the logic that is simulated.
 
-**Remarks**
+Remarks
+=======
 
 - All examples have been precompiled for Windows with g++ using compile_all.bat and will use console I/O.
 - Due to their simplicity the examples should also compile on Linux and OS X, using appropriate C++ compilers and shell scripts or make files.
@@ -69,5 +74,14 @@ Note that for educational purposes, the LED's can best be placed into a circuit 
 - There file *build.py* copies the files that all examples have in common to the example directories, renaming *rename.ino* to match the directory that holds it, as required by the Arduino IDE.
 - In general the "everything in one directory" approach of the Arduino IDE is followed, to keep things simple.
 - To edit the common files, use the ones in the parent directory and then run *build.py*, preferably using Python 3.6, although it may very well run with almost any Python version.
+
+Other packages you might like
+=============================
+
+- Multi-module Python source code obfuscator: https://pypi.python.org/pypi/Opy
+- PLC simulator with Arduino code generation: https://pypi.python.org/pypi/SimPyLC
+- A lightweight Python course taking beginners seriously (under construction): https://pypi.python.org/pypi/LightOn
+- Event driven evaluation nodes: https://pypi.python.org/pypi/Eden
+- Numscrypt (under construction, very early stage), experimental port of a microscopic part of NumPy to Transcrypt, using JavaScript typed arrays: https://pypi.python.org/pypi/Numscrypt
 
 
