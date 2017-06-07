@@ -13,7 +13,7 @@ To use it, set *Autocroll* on, set the line terminator to *Newline* and set the 
 
 On a PC a regular command prompt window is used for input and output.
 
-**Each simulation example has a *compile.bat*
+**Each simulation example has a *compile.bat* **
 
 **Usage**
 
