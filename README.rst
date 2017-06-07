@@ -1,7 +1,7 @@
 Wat is SimLogic
 ===============
 
-SimLogic is a simple logic simulator for educational purposes. It can work in conjunction with an Arduino. First *create* circuit elements and then *connect* them, as in the following code: ::
+SimLogic is a simple logic simulator for educational purposes. It can work in conjunction with an Arduino. First *create* circuit elements and then *connect* them, as in the following code for a half-adder: ::
 
     #include "simlogic.h"
 
@@ -78,10 +78,9 @@ Remarks
 Other packages you might like
 =============================
 
+- Interactive PLC simulator with Arduino code generation: https://pypi.python.org/pypi/SimPyLC
+- Lean and mean Python to JavaScript transpiler featuring multiple inheritance https://pypi.python.org/pypi/Transcrypt
+- Numscrypt (under construction, very early stage), experimental port of a microscopic part of NumPy to Transcrypt, using JavaScript typed arrays: https://pypi.python.org/pypi/Numscrypt
 - Multi-module Python source code obfuscator: https://pypi.python.org/pypi/Opy
-- PLC simulator with Arduino code generation: https://pypi.python.org/pypi/SimPyLC
 - A lightweight Python course taking beginners seriously (under construction): https://pypi.python.org/pypi/LightOn
 - Event driven evaluation nodes: https://pypi.python.org/pypi/Eden
-- Numscrypt (under construction, very early stage), experimental port of a microscopic part of NumPy to Transcrypt, using JavaScript typed arrays: https://pypi.python.org/pypi/Numscrypt
-
-
