@@ -16,7 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <simlogic.h>
+#include "simlogic.h"
 
 int main  () {
     create (Input, set);
@@ -28,7 +28,7 @@ int main  () {
     connect (reset, latch.reset);
     connect (latch, oneshot.in);
 
-    for (;;) {
+    while (true) {
         evaluate ();
     }
     

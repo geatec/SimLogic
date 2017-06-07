@@ -38,7 +38,7 @@ limitations under the License.
 11 + 11 = 110
 */
 
-#include <simlogic.h>
+#include "simlogic.h"
 
 /*
 Define macro for easy expansion to n bits
@@ -83,8 +83,8 @@ int main  () {
     connect (aFalse, inputCarry0.in);
     connect (carry0, inputCarry1.in);
     
-    for (;;) {
-#ifdef debug
+    while (true) {
+#ifdef __debug__
         char nr1 [3];
         cout << "First number: ";
         cin >> nr1;
@@ -100,7 +100,7 @@ int main  () {
         inputB1.in = getBit (nr2, 1);
 #endif
         evaluate ();
-#ifdef debug
+#ifdef __debug__
         cout << inputA1.value << inputA0.value;
         cout << " + ";
         cout << inputB1.value << inputB0.value;

@@ -16,9 +16,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <simlogic.h>
+#include "simlogic.h"
 
-int main  () {
+int main () {    
     create (Input, inputA);
     create (Input, inputB);
     create (And, anAnd);
@@ -28,13 +28,8 @@ int main  () {
     connect (inputB, anAnd.inB);
     connect (anAnd, aNot.in);
 
-    for (;;) {  // Forever loop, idiomatic since K&R C
-        // All Arduino digitalRead's go here
-        
-        // Evaluate interconnected circuit once
+    while (true) {
         evaluate ();
-        
-        // All Arduino digitalWrite's go here
     }
     
     return 0;

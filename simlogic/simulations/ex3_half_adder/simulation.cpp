@@ -16,7 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#include <simlogic.h>
+#include "simlogic.h"
 
 int main  () {
     create (Input, inputA);
@@ -29,7 +29,7 @@ int main  () {
     connect (inputA, carry.inA);
     connect (inputB, carry.inB);
 
-    for (;;) {
+    while (true) {
         evaluate ();
     }
     
