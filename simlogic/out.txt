@@ -1,0 +1,17 @@
+ Volume in drive D is Tosh
+ Volume Serial Number is 1428-E877
+
+ Directory of D:\activ_tosh\geatec\SimLogic\simlogic
+
+2017-06-07  15:40    <DIR>          .
+2017-06-07  15:40    <DIR>          ..
+2017-06-07  15:40             1,186 build.py
+2017-06-07  15:40               743 compile.bat
+2017-06-07  15:40                 0 out.txt
+2017-06-06  21:20               772 rename.ino
+2017-06-06  21:21             4,954 simlogic.cpp
+2017-06-06  21:33             2,943 simlogic.h
+2017-06-06  21:39               663 simulation.h
+2017-06-07  15:17    <DIR>          simulations
+               7 File(s)         11,261 bytes
+               3 Dir(s)  716,607,184,896 bytes free

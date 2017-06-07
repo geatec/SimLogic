@@ -1,13 +1,17 @@
 import os
 import shutil
 
+curDir= ''
+simDir = os.path.join (curDir, 'simulations')
+
 fileNames = []
-for name in os.listdir ():
-    if os.path.isfile (name):
+for name in os.listdir (curDir):
+    path = os.path.join (curDir, name)
+    if os.path.isfile (path):
         fileNames.append (name)
 
 dirNames = []
-for name in os.listdir ('simulations'):
+for name in os.listdir (simDir):
     if os.path.isdir (os.path.join ('simulations', name)):
         dirNames.append (name)
 
@@ -24,9 +28,6 @@ for dirName in dirNames:
 print ()
             
 for fileName in fileNames:
-    if fileName == 'build.py':
-        continue
-        
     for dirName in dirNames:        
         if fileName == 'rename.ino':
             targetFileName = dirName + '.ino'
@@ -35,10 +36,10 @@ for fileName in fileNames:
               
         targetPath = os.path.join ('simulations', dirName, targetFileName)
               
-        print ('Copying', fileName, 'to', targetPath)
+        print ('copyfile', fileName, targetPath)
         shutil.copyfile (fileName, targetPath)
-        
-for dirName in dirNames:
-    os.chdir (os.path.join ('simulations', dirName))
-    os.system ('compile')
-    os.chdir (os.path.join ('..', '..'))
+
+            
+      
+    
+    
