@@ -23,13 +23,6 @@ But using it merely requires C knowledge
 
 #include "simulation.h"
 
-#ifdef __arduino__
-#include <Arduino.h>  // Will provide all Arduino stuff
-#ifdef __debug__
-#include <stdlib.h>   // Will provide itoa
-#endif
-#endif
-
 struct CircuitElement {
     bool value;
     const char * const name;
@@ -100,7 +93,7 @@ struct Latch: CircuitElement  {
 
 struct CircuitEvaluator {
     CircuitElement *first, **lastSlot;
-#ifdef __debug__
+#ifdef console
     int cycleNr;
 #endif
     
@@ -115,19 +108,25 @@ extern CircuitEvaluator evaluator;
 extern void connect (CircuitElement &source, CircuitElement *&sinkInput);
 extern void evaluate ();
 
-#ifdef __debug__
-#ifdef __arduino__
+#ifdef arduino
+#include <Arduino.h>    // Will provide all Arduino stuff
+#define main __main__   // Arduino has its own main
+#endif
+
+#ifdef console
+#ifdef arduino
+#include <stdlib.h>     // Will provide itoa
 struct SerialStream {
     SerialStream &operator<< (const char * const data);
     SerialStream &operator<< (bool data);
     SerialStream &operator<< (int data);
     SerialStream &operator>> (char * const data);
 };
-
 extern const char * const endl;
 #else
 #include <iostream>
 using namespace std;
 #endif
 #endif
+
 

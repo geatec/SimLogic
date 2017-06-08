@@ -16,6 +16,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#define arduino
-#define console
+#include "simulation.h"
+extern void __main__ ();
+
+void setup () {
+#ifdef __debug__
+    Serial.begin (9600);
+#endif
+  __main__ ();
+}
+
+void loop () {
+}
 

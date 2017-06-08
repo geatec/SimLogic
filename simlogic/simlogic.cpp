@@ -18,8 +18,9 @@ limitations under the License.
 
 #include "simlogic.h"
 
-#ifdef __debug__
 #ifdef __arduino__
+
+#ifdef __debug__
 SerialStream &SerialStream::operator<< (const char * const data) {
     Serial.write (data);
     Serial.flush ();
@@ -57,6 +58,7 @@ SerialStream cin, cout;
 
 const char * const endl = "\n";
 #endif
+#else
 #endif
 
 CircuitElement::CircuitElement (const char * const name): name (name), value (0), next (0) {

@@ -18,7 +18,11 @@ limitations under the License.
 
 #include "simlogic.h"
 
-int main () {
+#ifdef __arduino__
+void __main__ () {
+#else
+int main () {    
+#endif
     create (Input, inputA);
     create (Input, inputB);
     create (Input, inputCarry);
@@ -44,13 +48,13 @@ int main () {
     connect (anAnd, carry.inA);
     connect (andAB, carry.inB);
     
-#ifdef arduino
+#ifdef __arduino__
     pinMode (2, INPUT); pinMode (3, INPUT); pinMode (4, INPUT);
     pinMode (5, OUTPUT); pinMode (6, OUTPUT); pinMode (7, OUTPUT); pinMode (8, OUTPUT); pinMode (9, OUTPUT);
 #endif
     
     while (true) {
-#ifdef arduino
+#ifdef __arduino__
         inputA.value = digitalRead (2);
         inputB.value = digitalRead (3);
         inputCarry.value = digitalRead (4);
@@ -58,7 +62,7 @@ int main () {
 
         evaluate ();
         
-#ifdef arduino
+#ifdef __arduino__
         digitalWrite (5, xorAB.value);
         digitalWrite (6, anAnd.value);
         digitalWrite (7, andAB.value);
@@ -66,5 +70,11 @@ int main () {
         digitalWrite (9, carry.value);
 #endif           
     }
+
+#ifndef __arduino__
     return 0;
+#endif
 }
+
+
+

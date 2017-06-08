@@ -16,6 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#define arduino
-#define console
+// #define __arduino__
+#define __debug__
 

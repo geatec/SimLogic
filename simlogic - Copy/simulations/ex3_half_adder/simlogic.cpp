@@ -18,9 +18,8 @@ limitations under the License.
 
 #include "simlogic.h"
 
-#ifdef console
-#ifdef arduino
-
+#ifdef __debug__
+#ifdef __arduino__
 SerialStream &SerialStream::operator<< (const char * const data) {
     Serial.write (data);
     Serial.flush ();
@@ -57,7 +56,6 @@ SerialStream &SerialStream::operator>> (char * const data) {
 SerialStream cin, cout;
 
 const char * const endl = "\n";
-
 #endif
 #endif
 
@@ -69,7 +67,7 @@ False::False (const char * const name): CircuitElement (name) {
     
 void False::evaluate () {
     value = false;
-#ifdef console
+#ifdef __debug__
     cout << "FALSE " << name << ": " << value << endl;
 #endif
 }
@@ -79,7 +77,7 @@ True::True (const char * const name): CircuitElement (name) {
 
 void True::evaluate () {
     value = true;
-#ifdef console
+#ifdef __debug__
     cout << "TRUE " << name << ": " << value << endl;
 #endif
 }
@@ -88,8 +86,8 @@ Input::Input (const char * const name): CircuitElement (name), in (0) {
 }
     
 void Input::evaluate () {                                   // Input connection terminal, should have its own message c.q. LED
-#ifdef console
-    if (in == 0) {                                          // console mode, not connected
+#ifdef __debug__
+    if (in == 0) {                                          // __debug__ mode, not connected
         char answer [2];
         cout << "INPUT " << name << ": " << " ";
         cin >> answer;
@@ -100,7 +98,7 @@ void Input::evaluate () {                                   // Input connection 
             value = true;
         }
     }
-    else {                                                  // console mode, connected
+    else {                                                  // __debug__ mode, connected
         value = in->value;
         cout << "INPUT " << name << ": " << value << endl;
     }
@@ -112,7 +110,7 @@ And::And (const char * const name): CircuitElement (name), inA (0), inB (0) {
 
 void And::evaluate () {
     value = inA->value && inB->value;
-#ifdef console
+#ifdef __debug__
     cout << "AND " << name << ": " << value << endl;
 #endif
 }
@@ -122,7 +120,7 @@ Or::Or (const char * const name): CircuitElement (name), inA (0), inB (0) {
 
 void Or::evaluate () {
     value = inA->value || inB->value;
-#ifdef console
+#ifdef __debug__
     cout << "OR " << name << ": " << value << endl;
 #endif
 }
@@ -132,7 +130,7 @@ Xor::Xor (const char * const name): CircuitElement (name), inA (0), inB (0) {
 
 void Xor::evaluate () {
     value = inA->value != inB->value;
-#ifdef console
+#ifdef __debug__
     cout << "XOR " << name << ": " << value << endl;
 #endif
 }
@@ -142,7 +140,7 @@ Not::Not (const char * const name): CircuitElement (name), in (0) {
 
 void Not::evaluate () {
     value = !in->value;
-#ifdef console
+#ifdef __debug__
     cout << "NOT " << name << ": " << value << endl;
 #endif
 }
@@ -153,7 +151,7 @@ Oneshot::Oneshot (const char * const name): CircuitElement (name), in (0), oldIn
 void Oneshot::evaluate () {
     value = in->value and !oldInputValue;
     oldInputValue = in->value;
-#ifdef console
+#ifdef __debug__
     cout << "ONESHOT " << name << ": " << value << endl;
 #endif
 }
@@ -168,13 +166,13 @@ void Latch::evaluate () {
     if (reset->value) {
         value = false;
     }
-#ifdef console
+#ifdef __debug__
     cout << "LATCH " << name << ": " << value << endl;
 #endif
 }
 
 CircuitEvaluator::CircuitEvaluator (): first (0), lastSlot (&first) {
-#ifdef console
+#ifdef __debug__
     cycleNr = 0;
 #endif
 }
@@ -185,7 +183,7 @@ void CircuitEvaluator::add (CircuitElement &element) {
 }
      
 void CircuitEvaluator::evaluate () {
-#ifdef console
+#ifdef __debug__
     cout << "CYCLE" << ++cycleNr << "\n";
 #endif    
     CircuitElement *current = first;
@@ -193,7 +191,7 @@ void CircuitEvaluator::evaluate () {
         current->evaluate ();
         current = current->next;
     }
-#ifdef console
+#ifdef __debug__
     cout << "\n";
 #endif
 }
