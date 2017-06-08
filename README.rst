@@ -1,7 +1,7 @@
 What is SimLogic
 ================
 
-SimLogic is a simple logic simulator for educational purposes. It can work in conjunction with an Arduino. First *create* circuit elements and then *connect* them, as in the following code for a half-adder: ::
+SimLogic is a simple logic simulator for educational purposes. It can work in conjunction with an Arduino single board embedded computer. First *create* circuit elements and then *connect* them, as in the following code for a half-adder: ::
 
     #include "simlogic.h"
 
