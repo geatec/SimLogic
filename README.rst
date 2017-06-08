@@ -1,5 +1,5 @@
-Wat is SimLogic
-===============
+What is SimLogic
+================
 
 SimLogic is a simple logic simulator for educational purposes. It can work in conjunction with an Arduino. First *create* circuit elements and then *connect* them, as in the following code for a half-adder: ::
 
@@ -27,21 +27,12 @@ Features
 
 Each SimLogic program is defined in a file called *simulation.cpp*. Note that this one file is the only "valuable" user made file in a project. All the rest is boilerplate code, identical for each project. A simulation can run in three ways, depending on macro defintions in *simulation.h*, namely:
 
-1. Console I/O on a PC (Command prompt), *__debug__* defined, *__arduino__* not defined.
-2. Console I/O on an Arduino (Serial monitor, but LED's function as well), *__debug__* defined, *__arduino__* defined.
-3. Hardware I/O on an Arduino (LED's and buttons), *__debug__* not defined, *__arduino__* not defined.
+1. Console I/O on a PC using a command prompt: *__debug__* defined, *__arduino__* not defined.
+2. Console I/O on an Arduino using its IDE's serial monitor: *__debug__* defined, *__arduino__* defined. In this case hardware outputs, e.g. LED's will also work. On the serial monitor, set *Autocroll* on, set the line terminator to *Newline* and set the speed to *9600 baud*. Input happens in one-line entry field at the top of the serial monitor window and is echoed together with output to the multinline text view field at the bottom.
+3. Hardware I/O on an Arduino, using e.g. buttos and LED's): *__debug__* not defined, *__arduino__* defined.
 
-To run the examples on an Arduino, rather than a PC, define symbol *__arduino__*.
-
-To debug using console I/O rather than switches, define symbol *__debug__*. On an Arduino, debugging happens using serial I/O and the serial monitor on the Arduino IDE.
-To use it, set *Autocroll* on, set the line terminator to *Newline* and set the speed to *9600 baud*. Input happens in one-line entry field at the top and is echoed together with output to the text view field below.
-
-On a PC a regular command prompt window is used for input and output.
-
-**Each simulation example has a *compile.bat* **
-
-Usage
-=====
+Input format utilizing console I/O
+==================================
 
 - Example 1 t/m 4: Enter INPUT values as 0 or 1
 - Example 5: Enter INPUT values as 00, 01, 10 or 01

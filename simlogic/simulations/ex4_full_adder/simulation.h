@@ -17,5 +17,5 @@ limitations under the License.
 */
 
 #define __arduino__
-#define __debug__
+// #define __debug__
 
