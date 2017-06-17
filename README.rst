@@ -58,7 +58,7 @@ Remarks
 - Due to their simplicity the examples should also compile on Linux and OS X, using appropriate C++ compilers and shell scripts or make files.
 - When running in a console Window, terminate each program simply by CTRL + C.
 - There's no error protection, so after an erroneous input best restart the program.
-- While simlogic.h and simlogic.cpp use C++ idiom, the examples only use C'ish idiom.
+- While *simlogic.h* and *simlogic.cpp* use C++ idiom, the examples only use C'ish idiom.
 - Only *simulation.cpp* of *ex4_full_adder* has been instrumented with Arduino facilities, so is ready to run on an Arduino. Instrumenting boils down to adding a few conditionally compiled lines, as can be seen in this example.
 - The other examples can be adapted likewise, if running on an Arduino is required.
 - To run on an Arduino, go to the example directory, edit *simulation.h* according to wether or not console I/O is desired, and then use [Sketch][Upload].
