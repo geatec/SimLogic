@@ -84,7 +84,7 @@ int main  () {
     connect (carry0, inputCarry1.in);
     
     while (true) {
-#ifdef __debug__
+#ifdef console
         char nr1 [3];
         cout << "First number: ";
         cin >> nr1;
@@ -100,7 +100,7 @@ int main  () {
         inputB1.in = getBit (nr2, 1);
 #endif
         evaluate ();
-#ifdef __debug__
+#ifdef console
         cout << inputA1.value << inputA0.value;
         cout << " + ";
         cout << inputB1.value << inputB0.value;

@@ -15,4 +15,4 @@ REM WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 REM See the License for the specific language governing permissions and
 REM limitations under the License.
 
-g++ simulation.cpp simlogic.cpp -o simulation.exe 
+g++ -D__pc__ simulation.cpp simlogic.cpp -o simulation.exe 

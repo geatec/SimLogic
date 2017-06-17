@@ -17,10 +17,11 @@ limitations under the License.
 */
 
 #include "simulation.h"
-extern void __main__ ();
+
+extern int __main__ ();
 
 void setup () {
-#ifdef __debug__
+#ifdef console
     Serial.begin (9600);
 #endif
   __main__ ();

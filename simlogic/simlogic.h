@@ -23,6 +23,10 @@ But using it merely requires C knowledge
 
 #include "simulation.h"
 
+#ifndef __pc__
+#define arduino
+#endif
+
 struct CircuitElement {
     bool value;
     const char * const name;
