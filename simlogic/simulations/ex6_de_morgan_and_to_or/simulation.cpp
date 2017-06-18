@@ -22,8 +22,10 @@ int main () {
     create (Input, rainy);
     create (Input, cold);
     
-    // Connect LED's to every created circuit
-    // Visually check equivalence between notRainyAndNotCold and not_rainyOrCold
+    /*
+    Connect LED's to every created circuit
+    Visually check equivalence between notRainyAndNotCold and not_rainyOrCold
+    */
     
     // It isn't rainy and it isn't cold
     
