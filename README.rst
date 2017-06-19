@@ -49,7 +49,12 @@ It was tested on an Arduino due, with the following test circuit:
 	
 	**Hardware for the full adder**
 
-Note that for educational purposes, the LED's can best be placed into a circuit diagram of the logic that is simulated.
+For educational purposes, the LED's can best be placed into a circuit diagram of the logic that is simulated, like shown below:
+
+.. figure:: http://www.qquick.org/simlogic/full_adder_diagram.jpg
+	:alt: Screenshot of hardware for the full adder example.
+	
+	**Circuit diagram with LEDs for the full adder**
 
 Remarks
 =======
