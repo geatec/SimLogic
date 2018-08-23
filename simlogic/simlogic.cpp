@@ -88,8 +88,8 @@ Input::Input (const char * const name): CircuitElement (name), in (0) {
 }
     
 void Input::evaluate () {                                   // Input connection terminal, should have its own message c.q. LED
-#ifdef console
     if (in == 0) {                                          // console mode, not connected
+#ifdef console
         char answer [2];
         cout << "INPUT " << name << ": " << " ";
         cin >> answer;
@@ -99,12 +99,14 @@ void Input::evaluate () {                                   // Input connection 
         else if (answer [0] == '1') {
             value = true;
         }
+#endif
     }
     else {                                                  // console mode, connected
         value = in->value;
+#ifdef console
         cout << "INPUT " << name << ": " << value << endl;
-    }
 #endif
+    }
 }
 
 And::And (const char * const name): CircuitElement (name), inA (0), inB (0) {
